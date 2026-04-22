@@ -15,9 +15,10 @@ class Settings(BaseSettings):
     backend_port: int = 8000
 
     llm_provider: str = "ollama"
-    llm_model: str = "ollama/llama3.2:3b-instruct"
+    llm_model: str = "ollama/qwen2.5:7b-instruct"
     llm_base_url: str = "http://localhost:11434"
     llm_api_key: str | None = None
+    llm_timeout_s: int = 60
 
     spacy_model: str = "nl_core_news_md"
     clip_model: str = "ViT-B-32"

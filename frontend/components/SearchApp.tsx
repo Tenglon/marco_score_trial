@@ -9,6 +9,7 @@ import { SearchBar } from "./SearchBar";
 import { Facets } from "./Facets";
 import { Timeline } from "./Timeline";
 import { ResultCard } from "./ResultCard";
+import { LlmPanel } from "./LlmPanel";
 
 const FACET_KEYS: FacetName[] = [
   "creator",
@@ -166,6 +167,8 @@ export function SearchApp() {
             />
           )}
 
+          <LlmPanel q={params.q} onApplyAlternative={onQuery} />
+
           <ResultsHeader
             total={data?.total ?? 0}
             took={data?.took_ms ?? 0}
@@ -234,7 +237,7 @@ function Masthead() {
             — entities
           </a>
           <span className="text-ink-soft/40">— compare · soon</span>
-          <span className="text-ink-soft/40">— llm · soon</span>
+          <span className="text-ink">— llm (inline)</span>
         </nav>
       </div>
     </header>

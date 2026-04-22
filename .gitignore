@@ -54,3 +54,4 @@ models/
 # Personal docs — not committed. Remove from .gitignore if you want to include.
 cover_letter.pdf
 /frontend/shoot.mjs
+/frontend/shoot-llm.mjs
