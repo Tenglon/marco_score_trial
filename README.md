@@ -30,6 +30,9 @@ ViT-B/32 / LAION-2B embeddings over a FAISS inner-product index. Warm text
 query: ~9 ms. Image upload: ~180 ms. "Similar by id" (vector reconstruction
 + search): ~3 ms.
 
+See [docs/clip-search.md](docs/clip-search.md) for the full pipeline
+walkthrough (offline build + online query path + design tradeoffs).
+
 ![visual](docs/screenshots/visual.png)
 
 ### 3 · Entities · co-occurrence network
