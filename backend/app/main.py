@@ -16,6 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from opensearchpy import OpenSearch
 
 from backend.app.config import get_settings
+from backend.app.entities import router as entities_router
 from backend.app.multimodal import router as multimodal_router
 from backend.app.search import router as search_router
 
@@ -53,6 +54,7 @@ app.add_middleware(
 
 app.include_router(search_router)
 app.include_router(multimodal_router)
+app.include_router(entities_router)
 
 
 @app.get("/health", tags=["meta"])

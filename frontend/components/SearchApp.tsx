@@ -230,8 +230,10 @@ function Masthead() {
           <a className="hover:text-brick" href="/visual">
             — visual
           </a>
+          <a className="hover:text-brick" href="/entities">
+            — entities
+          </a>
           <span className="text-ink-soft/40">— compare · soon</span>
-          <span className="text-ink-soft/40">— entities · soon</span>
           <span className="text-ink-soft/40">— llm · soon</span>
         </nav>
       </div>
