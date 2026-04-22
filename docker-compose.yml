@@ -1,0 +1,83 @@
+name: beeldensearch
+
+services:
+  opensearch:
+    image: opensearchproject/opensearch:2.15.0
+    container_name: bs-opensearch
+    environment:
+      - cluster.name=beeldensearch
+      - node.name=opensearch-node1
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "DISABLE_SECURITY_PLUGIN=true"  # demo only — do not copy to prod
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: bs-ollama
+    volumes:
+      - ollama-data:/root/.ollama
+    ports:
+      - "11434:11434"
+    # GPU access is optional — uncomment if you have NVIDIA Container Toolkit
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: bs-backend
+    depends_on:
+      opensearch:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    environment:
+      - OPENSEARCH_URL=http://opensearch:9200
+      - OPENSEARCH_INDEX=openbeelden
+      - LLM_PROVIDER=ollama
+      - LLM_MODEL=ollama/llama3.2:3b-instruct
+      - LLM_BASE_URL=http://ollama:11434
+    volumes:
+      - ./data:/app/data:ro
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bs-frontend
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+    ports:
+      - "3000:3000"
+
+volumes:
+  opensearch-data:
+  ollama-data:
