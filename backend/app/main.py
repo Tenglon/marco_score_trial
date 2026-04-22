@@ -16,6 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from opensearchpy import OpenSearch
 
 from backend.app.config import get_settings
+from backend.app.search import router as search_router
 
 log = logging.getLogger("beeldensearch")
 
@@ -43,11 +44,13 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origin_regex=r"http://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(search_router)
 
 
 @app.get("/health", tags=["meta"])

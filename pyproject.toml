@@ -53,7 +53,10 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
-ignore = ["E501"]
+ignore = [
+    "E501",  # line-length handled by formatter
+    "B008",  # FastAPI/Pydantic rely on function-call defaults (Depends, Query, Field)
+]
 
 [tool.mypy]
 python_version = "3.11"

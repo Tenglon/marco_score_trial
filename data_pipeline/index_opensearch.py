@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Any
 
 from opensearchpy import OpenSearch
-from opensearchpy.helpers import bulk
+from opensearchpy.helpers import streaming_bulk
 from tqdm import tqdm
 
 log = logging.getLogger("index_opensearch")
@@ -135,7 +135,7 @@ def index_records(
 ) -> tuple[int, int]:
     success, errors = 0, 0
     pbar = tqdm(total=len(records), desc="indexing", unit="doc")
-    for ok, _ in bulk(
+    for ok, _ in streaming_bulk(
         client,
         _iter_actions(iter(records), index),
         chunk_size=chunk,
