@@ -236,7 +236,9 @@ function Masthead() {
           <a className="hover:text-brick" href="/entities">
             — entities
           </a>
-          <span className="text-ink-soft/40">— compare · soon</span>
+          <a className="hover:text-brick" href="/compare">
+            — compare
+          </a>
           <span className="text-ink">— llm (inline)</span>
         </nav>
       </div>

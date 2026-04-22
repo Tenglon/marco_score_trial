@@ -34,9 +34,11 @@ The LLM panel provides two features:
    verify. No generation happens without retrieved context.
 
 The LLM panel is clearly marked as "experimental" in the UI and defaults to a
-small open-source model (`llama3.2:3b-instruct` via Ollama) so researchers can
-run it offline without sending queries to a third party. Users may switch to an
-OpenAI-compatible API via the `LLM_BASE_URL` and `LLM_MODEL` env vars.
+local open-source model (`qwen2.5:7b-instruct` via Ollama) so researchers can
+run it offline without sending queries to a third party. Users may switch to a
+smaller model (e.g. `llama3.2:3b-instruct`) for CPU laptops, or to any
+OpenAI-compatible API via the `LLM_BASE_URL`, `LLM_MODEL`, and `LLM_API_KEY`
+env vars.
 
 The demo does not train, fine-tune, or retain any user query data. All
 interaction happens locally against the indexed sample.
