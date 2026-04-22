@@ -226,10 +226,10 @@ function Masthead() {
           </p>
         </div>
         <nav className="hidden flex-col items-end gap-1 font-mono text-[11px] uppercase tracking-archive text-muted md:flex">
-          <a className="hover:text-brick" href="#">
-            Search
+          <span className="text-ink">Search</span>
+          <a className="hover:text-brick" href="/visual">
+            — visual
           </a>
-          <span className="text-ink-soft/40">— visual · soon</span>
           <span className="text-ink-soft/40">— compare · soon</span>
           <span className="text-ink-soft/40">— entities · soon</span>
           <span className="text-ink-soft/40">— llm · soon</span>

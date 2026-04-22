@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 import type { Hit } from "@/lib/types";
 import { sanitizeHighlight } from "@/lib/highlight";
 
@@ -108,6 +109,14 @@ export function ResultCard({ hit, rank }: Props) {
             </>
           )}
         </dl>
+
+        <Link
+          href={`/visual?id=${encodeURIComponent(hit.id)}`}
+          className="inline-flex items-center gap-1.5 border border-ink/30 bg-transparent px-2.5 py-1 font-mono text-[10px] uppercase tracking-archive text-ink-soft transition hover:border-brick hover:text-brick"
+        >
+          <Sparkles className="h-3 w-3" />
+          similar images
+        </Link>
       </div>
     </article>
   );
